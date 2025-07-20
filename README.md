@@ -18,7 +18,7 @@ This repository contains the implementation of a Transformer-based noise detecti
 
 To process and correct noisy samples, run:
 
-```bash
+
 python code_L8.py   # Run pipeline on Landsat 8 data
 python code_S2.py   # Run pipeline on Sentinel-2 data
 
@@ -46,3 +46,16 @@ The proposed framework consists of the following components:
 - `pykrige`
 - `matplotlib`
 
+Each script performs the following steps:
+
+- Noise detection using Isolation Forest  
+- Noise correction using Kriging (for baseline) or cGAN (for proposed)  
+- Output saving of corrected datasets for SOC modeling
+
+---
+
+## 📬 Contact
+
+**Dristi Datta**  
+PhD Candidate, Charles Sturt University  
+Email: ddatta@csu.edu.au
