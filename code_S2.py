@@ -13,7 +13,7 @@ print("PyTorch version:", torch.__version__)
 print("CUDA available:", torch.cuda.is_available())
 
 # Load your dataset
-df = pd.read_excel('OC_S2_bands.xlsx')  # Replace with your dataset file path
+df = pd.read_excel('data_S2.xlsx')  # Replace with your dataset file path
 X = df.iloc[:, 1:].values  # S2 reflectance (10 bands)
 y = df.iloc[:, 0].values   # Ground truth SOC
 
@@ -216,19 +216,19 @@ reconstructed_reflections = scaler.inverse_transform(reconstructed_reflections)
 # Save the reconstructed reflections to an Excel file
 reconstructed_df = pd.DataFrame(reconstructed_reflections, columns=df.columns[1:])
 reconstructed_df.insert(0, 'SOC', y[noisy_indices])  # Insert SOC values
-reconstructed_df.to_excel('S2_reconstructed_noisy_samples4.xlsx', index=False)
+reconstructed_df.to_excel('S2_reconstructed_noisy_samples.xlsx', index=False)
 
-print("Reconstructed noisy samples reflections have been saved to 'S2_reconstructed_noisy_samples4.xlsx'.")
+print("Reconstructed noisy samples reflections have been saved to 'S2_reconstructed_noisy_samples.xlsx'.")
 
 # Step 5: Combine non-noisy samples with reconstructed noisy samples
 non_noisy_indices = np.setdiff1d(np.arange(len(df)), noisy_indices)
 non_noisy_df = df.iloc[non_noisy_indices]
 
 # Save non-noisy samples
-non_noisy_df.to_excel('S2_non_noisy_samples4.xlsx', index=False)
-print("Non-noisy samples have been saved to 'S2_non_noisy_samples4.xlsx'.")
+non_noisy_df.to_excel('S2_non_noisy_samples.xlsx', index=False)
+print("Non-noisy samples have been saved to 'S2_non_noisy_samples.xlsx'.")
 
 # Combine and save
 df_combined = pd.concat([non_noisy_df, reconstructed_df], ignore_index=True)
-df_combined.to_excel('S2_combined_samples4.xlsx', index=False)
-print("Combined samples (non-noisy and reconstructed noisy samples) have been saved to 'S2_combined_samples4.xlsx'.")
+df_combined.to_excel('S2_combined_samples.xlsx', index=False)
+print("Combined samples (non-noisy and reconstructed noisy samples) have been saved to 'S2_combined_samples.xlsx'.")

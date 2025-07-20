@@ -14,7 +14,7 @@ print("PyTorch version:", torch.__version__)
 print("CUDA available:", torch.cuda.is_available())
 
 # Load your dataset
-df = pd.read_excel('1_Bare Soil_7bands.xlsx')  # Replace with your dataset file path
+df = pd.read_excel('data_L8.xlsx')  # Replace with your dataset file path
 X = df.iloc[:, 1:].values  # Landsat 8 reflections (7 bands)
 y = df.iloc[:, 0].values   # Ground truth SOC
 
@@ -99,8 +99,8 @@ print(len(noisy_indices))
 
 # Step 3: Save noisy soil samples with SOC to an Excel file
 df_noisy_samples = df.iloc[noisy_indices]
-df_noisy_samples.to_excel('300noisy_samples_with_SOC.xlsx', index=False)
-print("Noisy soil samples with SOC have been saved to '300noisy_samples_with_SOC.xlsx'.")
+df_noisy_samples.to_excel('L8_noisy_samples_with_SOC.xlsx', index=False)
+print("Noisy soil samples with SOC have been saved to 'L8_noisy_samples_with_SOC.xlsx'.")
 
 # Step 4: Conditional GAN for Data Reconstruction
 class ConditionalGenerator(nn.Module):
@@ -212,9 +212,9 @@ reconstructed_reflections = scaler.inverse_transform(reconstructed_reflections)
 # Save the reconstructed reflections to an Excel file
 reconstructed_df = pd.DataFrame(reconstructed_reflections, columns=df.columns[1:])
 reconstructed_df.insert(0, 'SOC', y[noisy_indices])  # Insert SOC values
-reconstructed_df.to_excel('300reconstructed_noisy_samples.xlsx', index=False)
+reconstructed_df.to_excel('L8_reconstructed_noisy_samples.xlsx', index=False)
 
-print("Reconstructed noisy samples reflections have been saved to '300reconstructed_noisy_samples.xlsx'.")
+print("Reconstructed noisy samples reflections have been saved to 'L8_reconstructed_noisy_samples.xlsx'.")
 
 # Step 5: Combine non-noisy samples with reconstructed noisy samples
 # Identify non-noisy samples by excluding noisy indices
@@ -224,17 +224,17 @@ non_noisy_indices = np.setdiff1d(np.arange(len(df)), noisy_indices)
 df_non_noisy = df.iloc[non_noisy_indices]
 
 # Save the non-noisy samples to an Excel file
-df_non_noisy.to_excel('300non_noisy_samples.xlsx', index=False)
-print("Non-noisy samples have been saved to '300non_noisy_samples.xlsx'.")
+df_non_noisy.to_excel('L8_non_noisy_samples.xlsx', index=False)
+print("Non-noisy samples have been saved to 'L8_non_noisy_samples.xlsx'.")
 
 # Combine non-noisy samples with reconstructed noisy samples
 df_combined = pd.concat([df_non_noisy, reconstructed_df], ignore_index=True)
 
 # Save the combined dataset to an Excel file
-df_combined.to_excel('300combined_samples.xlsx', index=False)
-print("Combined samples (non-noisy and reconstructed noisy samples) have been saved to '300combined_samples.xlsx'.")
+df_combined.to_excel('L8_combined_samples.xlsx', index=False)
+print("Combined samples (non-noisy and reconstructed noisy samples) have been saved to 'L8_combined_samples.xlsx'.")
 
 # Step 6: Save non-noisy samples to an Excel file
-df_non_noisy.to_excel('300non_noisy_samples.xlsx', index=False)
-print("Non-noisy samples have been saved to '300non_noisy_samples.xlsx'.")
+df_non_noisy.to_excel('L8_non_noisy_samples.xlsx', index=False)
+print("Non-noisy samples have been saved to 'L8_non_noisy_samples.xlsx'.")
 
