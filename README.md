@@ -1,6 +1,6 @@
 # Transformer-Guided Noise Detection and Correction in Remote Sensing Data for Enhanced Soil Organic Carbon Estimation
 
-This repository contains the implementation of a Transformer-based noise detection and correction framework for improving Soil Organic Carbon (SOC) estimation using satellite reflectance data. The proposed method combines deep learning and machine learning techniques to detect and reconstruct noisy soil samples from both Landsat 8 (L8) and Sentinel-2 (S2) datasets.
+This repository contains the implementation of a Transformer-based noise detection and correction framework for improving Soil Organic Carbon (SOC) estimation using satellite reflectance data. The proposed method combines deep learning and machine learning techniques to detect and correct noisy soil samples from both Landsat 8 (L8) and Sentinel-2 (S2) datasets.
 
 📄 **Preprint Available**: [SSRN - Link to Preprint](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5205193)  
 📚 **Under Review**: *Precision Agriculture*, Springer
@@ -14,7 +14,9 @@ This repository contains the implementation of a Transformer-based noise detecti
 - `code_L8.py` – Full pipeline for detecting and correcting noise in L8 data
 - `code_S2.py` – Full pipeline for detecting and correcting noise in S2 data
 
----## ▶️ How to Run
+----
+
+## ▶️ How to Run
 
 To process and correct noisy samples, run:
 
@@ -48,8 +50,8 @@ The proposed framework consists of the following components:
 
 Each script performs the following steps:
 
-- Noise detection using Isolation Forest  
-- Noise correction using Kriging (for baseline) or cGAN (for proposed)  
+- Noise detection using Transformer-guided Isolation Forest  
+- Noise correction using cGAN  
 - Output saving of corrected datasets for SOC modeling
 
 ---
